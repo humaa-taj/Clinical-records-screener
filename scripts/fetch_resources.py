@@ -89,10 +89,12 @@ def fetch_nltk(lock):
     print("nltk ok: punkt_tab", flush=True)
 
 
-def fetch_models_from_lock():
+def fetch_models_from_lock(only=None):
     """Download only the models, at the revisions already recorded. Used on Kaggle."""
     lock = json.loads(LOCK.read_text(encoding="utf-8"))
     for repo_id, entry in lock["models"].items():
+        if only and repo_id not in only:
+            continue
         snapshot_download(
             repo_id, revision=entry["revision"], local_dir=ROOT / entry["path"], ignore_patterns=SKIP_PATTERNS
         )
@@ -102,6 +104,11 @@ def fetch_models_from_lock():
 def main():
     if "--models-from-lock" in sys.argv:
         fetch_models_from_lock()
+        return
+    if "--app" in sys.argv:
+        # Just what the browser app needs: target and draft models plus the sentence splitter.
+        fetch_models_from_lock(only={"Qwen/Qwen2.5-1.5B-Instruct", "Qwen/Qwen2.5-0.5B-Instruct"})
+        fetch_nltk({})
         return
     lock = {"dataset": {}, "models": {}, "papers": {}, "nltk": {}}
     api = HfApi()
