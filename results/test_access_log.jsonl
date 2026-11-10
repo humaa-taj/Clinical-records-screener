@@ -1,0 +1,6 @@
+{"time_utc": "2026-11-09T12:24:05.973552+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": "models/qwen2.5-1.5b", "adapter": null, "order": "label_first", "baseline": false}
+{"time_utc": "2026-11-09T12:24:50.950079+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": "models/qwen2.5-1.5b", "adapter": "models/crs-adapter", "order": "label_first", "baseline": false}
+{"time_utc": "2026-11-09T12:25:35.257615+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": null, "adapter": null, "order": "label_first", "baseline": true}
+{"time_utc": "2026-11-09T14:10:38.046952+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": "models/qwen2.5-1.5b", "adapter": null, "order": "label_first", "baseline": false}
+{"time_utc": "2026-11-09T14:11:24.681088+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": "models/qwen2.5-1.5b", "adapter": "models/crs-adapter", "order": "label_first", "baseline": false}
+{"time_utc": "2026-11-09T14:12:10.578691+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": null, "adapter": null, "order": "label_first", "baseline": true}
