@@ -1,0 +1,13 @@
+Number check judged once on the validation split, after development on training notes only.
+Bar fixed in advance: auto-correction is enabled only if every decision matches the expert label.
+app/number_check.py blob: dd5bb3c2afe7a4b82463ca2bd978b49255257e5b
+
+validation rows 206 decided 5
+check matches gold 5
+model matches gold on those 5
+would change model 0 | of those check right 0
+(2, 'inclusion', 'Age 25 to 65 years', 58.0, 0, [0], 'included', 'included', 'included')
+(516, 'inclusion', 'Greater than 18 years old', 21.0, 0, [0], 'included', 'included', 'included')
+(517, 'exclusion', 'Less than 18 years old', 21.0, 0, [], 'not excluded', 'not excluded', 'not excluded')
+(798, 'inclusion', 'Age > 18 years', 72.0, 0, [0], 'included', 'included', 'included')
+(929, 'inclusion', 'At least 18 years of age', 65.0, 0, [0], 'included', 'included', 'included')

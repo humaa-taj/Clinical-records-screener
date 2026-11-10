@@ -1,0 +1,90 @@
+status ready models\crs-adapter True
+
+== oncology, abbreviations: 6 sentences => done Needs review | 2 verdicts cite no sentence.
+   [0] Pt is a 62 y/o F with stage IIIB NSCLC dx'd in March 2024.
+   [1] ECOG PS 1.
+   [2] She completed carboplatin and paclitaxel with concurrent RT in June.
+   [3] Cr 0.9 mg/dL and ALT 34 U/L.
+   [4] She denies any hx of interstitial lung disease.
+   [5] She quit smoking 15 years ago.
+   ok  Age 18 years or older                          want included                 got included                 [0]
+   ok  Non-small cell lung cancer                     want included                 got included                 [0]
+   ok  ECOG performance status 0 to 2                 want included                 got included                 [1]
+   ok  History of interstitial lung disease           want not excluded             got not excluded             []
+   XX  Active hepatitis B infection                   want not enough information   got not excluded             []
+   ok  Serum creatinine above 2.0 mg/dL               want not excluded             got not excluded             [3]
+
+== rheumatology, male patient: 4 sentences => done Needs review | 1 criterion has too little information in the note and 2 verdicts cite no sentence.
+   [0] A 45-year-old man has had rheumatoid arthritis for 8 years.
+   [1] His disease remained active despite methotrexate for 12 months.
+   [2] He has 10 swollen joints and a CRP of 22 mg/L.
+   [3] He was treated for tuberculosis in 2010.
+   XX  Rheumatoid arthritis for at least 6 months     want included                 got not enough information   [0]
+   ok  Inadequate response to methotrexate            want included                 got included                 [1]
+   XX  History of tuberculosis                        want excluded                 got not excluded             []
+   ok  Pregnant or breastfeeding women                want not applicable           got not applicable           []
+   XX  Prior treatment with rituximab                 want not enough information   got not excluded             []
+
+== numeric thresholds: 5 sentences => done Likely ineligible | 1 criterion failed with cited evidence.
+   [0] A 52-year-old man attends the diabetes clinic.
+   [1] His BMI is 33 kg/m2.
+   [2] His HbA1c is 7.9 percent.
+   [3] His eGFR is 72 mL/min/1.73m2.
+   [4] He has never used insulin.
+   ok  BMI of at least 30 kg/m2                       want included                 got included                 [1]
+   ok  HbA1c between 7.0 and 9.5 percent              want included                 got included                 [2]
+   ok  BMI below 25 kg/m2                             want not included             got not included             [1]
+   ok  eGFR below 45 mL/min/1.73m2                    want not excluded             got not excluded             [3]
+   ok  Prior insulin use                              want not excluded             got not excluded             []
+
+== multi-line, list formatted: 5 sentences => done Likely ineligible | 1 criterion failed with cited evidence.
+   [0] 71-year-old woman with atrial fibrillation.
+   [1] Takes apixaban 5 mg twice daily.
+   [2] Ischemic stroke two years ago.
+   [3] Blood pressure 148/86 mmHg.
+   [4] Pulse irregular at 88 beats per minute.
+   ok  Atrial fibrillation                            want included                 got included                 [0]
+   ok  Age 18 to 65 years                             want not included             got not included             [0]
+   XX  Current anticoagulant therapy                  want excluded                 got not excluded             [1]
+   XX  Active cancer                                  want not enough information   got not excluded             []
+
+== pediatric, negation: 4 sentences => done Likely ineligible | 1 criterion failed with cited evidence.
+   [0] A 7-year-old boy has had a persistent cough for three weeks.
+   [1] There is no fever.
+   [2] He has no known drug allergies.
+   [3] A chest radiograph was normal.
+   ok  Age under 12 years                             want included                 got included                 [0]
+   ok  Fever of at least 38 degrees Celsius           want not included             got not included             [1]
+   ok  Known allergy to penicillin                    want not excluded             got not excluded             []
+   ok  Abnormal chest radiograph                      want not excluded             got not excluded             [3]
+
+my expected labels matched: 18/24
+  miss ('oncology, abbreviations', 'Active hepatitis B infection', 'not enough information', 'not excluded', [])
+  miss ('rheumatology, male patient', 'Rheumatoid arthritis for at least 6 months', 'included', 'not enough information', [0])
+  miss ('rheumatology, male patient', 'History of tuberculosis', 'excluded', 'not excluded', [])
+  miss ('rheumatology, male patient', 'Prior treatment with rituximab', 'not enough information', 'not excluded', [])
+  miss ('multi-line, list formatted', 'Current anticoagulant therapy', 'excluded', 'not excluded', [1])
+  miss ('multi-line, list formatted', 'Active cancer', 'not enough information', 'not excluded', [])
+
+-- bad input
+   empty note      400 Enter a patient note first.
+   number soup     400 That text does not look like a clinical note.
+   null bytes      400 That file does not look like plain text.
+   too long        400 That note is too long. The limit is 20,000 characters.
+   no criteria     400 Enter at least one inclusion or exclusion criterion.
+   blank sentence  400 Every sentence needs text. Remove any empty sentences.
+   bad mode        400 Choose a valid decoding mode.
+   41 criteria     400 That is too many criteria. The limit is 40.
+   trial NCT1         400 Enter a trial ID such as NCT01234567.
+   trial NCT99999999  404 No trial was found for NCT99999999.
+   trial real 200 Preconditioning Shields Against Vascular Events in Surgery 6 10
+
+-- modes and comparisons
+   uncached done [('included', [0]), ('not excluded', [])] None
+   speculative done [('included', [0]), ('not excluded', [])] None
+   decoding done None [('uncached', 1.19, True), ('cached', 0.69, True), ('speculative', 1.86, True)]
+   attention done None 4.76837158203125e-07 73.23219999670982 47.34699986875057
+   cancel cancelled 2/20
+
+-- provenance {"target_model": "models/qwen2.5-1.5b", "adapter": "models\\crs-adapter", "trained": true, "output_order": "label_first", "device": "NVIDIA GeForce RTX 3050 Ti Laptop GPU", "target_revision": "Qwen/Qwen2.5-1.5B-Instruct@989aa7980e4cf806f80c7fef2b1adb7bc71aa306", "adapter_revision": "faa-tehe/crs-qwen2.5-1.5b-lora@4925e9b7b4ad7a7afdf88efd04260ca1405e55c0", "decoding_mode": "cached", "note_sha256": "247cd5ce3d314c50e6b1f998dae52edb8c1782cbd798ad585931ac7fff7840a6"}
+   html 200 75 KB True
