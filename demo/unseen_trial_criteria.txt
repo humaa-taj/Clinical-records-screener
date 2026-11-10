@@ -1,0 +1,10 @@
+INCLUSION (paste into the left box)
+Adults aged 40 to 75 years
+Diagnosis of type 2 diabetes
+BMI of at least 30
+
+EXCLUSION (paste into the right box)
+History of myocardial infarction
+Pregnancy
+Current insulin therapy
+Severe renal impairment with eGFR below 30
