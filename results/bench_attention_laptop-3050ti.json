@@ -1,0 +1,398 @@
+{
+  "label": "laptop-3050ti",
+  "dtype": "float32",
+  "heads": 8,
+  "head_dim": 64,
+  "mask": "causal",
+  "repeats": 3,
+  "warm_up_runs_discarded": 1,
+  "torch": "2.11.0+cu128",
+  "results": [
+    {
+      "device": "cpu",
+      "length": 64,
+      "modes": {
+        "reference": {
+          "median_s": 0.00022039981558918953,
+          "stdev_s": 6.1612609837927926e-06,
+          "peak_extra_gpu_mb": null,
+          "largest_score_matrix_mb": 0.125
+        },
+        "pytorch_fused": {
+          "median_s": 6.59001525491476e-05,
+          "stdev_s": 5.531907343204504e-06,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 5.364418029785156e-07
+        },
+        "tiled_16": {
+          "median_s": 0.0022909000981599092,
+          "stdev_s": 0.00015840013675439926,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 4.76837158203125e-07,
+          "mean_abs_error": 2.5973346140517606e-08,
+          "tiles_computed": 10,
+          "tiles_skipped_by_causal_mask": 6,
+          "largest_score_matrix_mb": 0.0078125
+        },
+        "tiled_64": {
+          "median_s": 0.0005710001569241285,
+          "stdev_s": 0.00012926414855163015,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 4.76837158203125e-07,
+          "mean_abs_error": 2.6311317569138737e-08,
+          "tiles_computed": 1,
+          "tiles_skipped_by_causal_mask": 0,
+          "largest_score_matrix_mb": 0.125
+        },
+        "tiled_256": {
+          "median_s": 0.0005849997978657484,
+          "stdev_s": 5.5893557871824353e-05,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 4.76837158203125e-07,
+          "mean_abs_error": 2.6311317569138737e-08,
+          "tiles_computed": 1,
+          "tiles_skipped_by_causal_mask": 0,
+          "largest_score_matrix_mb": 0.125
+        }
+      }
+    },
+    {
+      "device": "cpu",
+      "length": 256,
+      "modes": {
+        "reference": {
+          "median_s": 0.001005199970677495,
+          "stdev_s": 0.0001001047958477349,
+          "peak_extra_gpu_mb": null,
+          "largest_score_matrix_mb": 2.0
+        },
+        "pytorch_fused": {
+          "median_s": 0.0005152998492121696,
+          "stdev_s": 1.088365124695309e-05,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 6.556510925292969e-07
+        },
+        "tiled_16": {
+          "median_s": 0.03847730020061135,
+          "stdev_s": 0.0021116255002687767,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 4.76837158203125e-07,
+          "mean_abs_error": 2.4821286359610895e-08,
+          "tiles_computed": 136,
+          "tiles_skipped_by_causal_mask": 120,
+          "largest_score_matrix_mb": 0.0078125
+        },
+        "tiled_64": {
+          "median_s": 0.0052780997939407825,
+          "stdev_s": 0.0003260074385902194,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 5.364418029785156e-07,
+          "mean_abs_error": 2.612637217680458e-08,
+          "tiles_computed": 10,
+          "tiles_skipped_by_causal_mask": 6,
+          "largest_score_matrix_mb": 0.125
+        },
+        "tiled_256": {
+          "median_s": 0.0015165000222623348,
+          "stdev_s": 9.288742661406654e-05,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 7.152557373046875e-07,
+          "mean_abs_error": 2.8086962089446388e-08,
+          "tiles_computed": 1,
+          "tiles_skipped_by_causal_mask": 0,
+          "largest_score_matrix_mb": 2.0
+        }
+      }
+    },
+    {
+      "device": "cpu",
+      "length": 1024,
+      "modes": {
+        "reference": {
+          "median_s": 0.025005199946463108,
+          "stdev_s": 0.0004904625199986712,
+          "peak_extra_gpu_mb": null,
+          "largest_score_matrix_mb": 32.0
+        },
+        "pytorch_fused": {
+          "median_s": 0.007475899998098612,
+          "stdev_s": 0.00021609902101940202,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 5.960464477539062e-07
+        },
+        "tiled_16": {
+          "median_s": 0.6099215999711305,
+          "stdev_s": 0.0103785055515018,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 5.364418029785156e-07,
+          "mean_abs_error": 1.9926140737425158e-08,
+          "tiles_computed": 2080,
+          "tiles_skipped_by_causal_mask": 2016,
+          "largest_score_matrix_mb": 0.0078125
+        },
+        "tiled_64": {
+          "median_s": 0.06573639996349812,
+          "stdev_s": 0.005775307634396077,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 6.556510925292969e-07,
+          "mean_abs_error": 2.0433844838407822e-08,
+          "tiles_computed": 136,
+          "tiles_skipped_by_causal_mask": 120,
+          "largest_score_matrix_mb": 0.125
+        },
+        "tiled_256": {
+          "median_s": 0.014161899918690324,
+          "stdev_s": 0.0005598479664030977,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 5.960464477539062e-07,
+          "mean_abs_error": 2.3261993220557997e-08,
+          "tiles_computed": 10,
+          "tiles_skipped_by_causal_mask": 6,
+          "largest_score_matrix_mb": 2.0
+        }
+      }
+    },
+    {
+      "device": "cpu",
+      "length": 4096,
+      "modes": {
+        "reference": {
+          "median_s": 0.49266180000267923,
+          "stdev_s": 0.163129163610068,
+          "peak_extra_gpu_mb": null,
+          "largest_score_matrix_mb": 512.0
+        },
+        "pytorch_fused": {
+          "median_s": 0.11977700004354119,
+          "stdev_s": 0.0006713747579027503,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 8.344650268554688e-07
+        },
+        "tiled_16": {
+          "median_s": 9.7367342999205,
+          "stdev_s": 0.23311753369673507,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 8.344650268554688e-07,
+          "mean_abs_error": 1.4018145755301248e-08,
+          "tiles_computed": 32896,
+          "tiles_skipped_by_causal_mask": 32640,
+          "largest_score_matrix_mb": 0.0078125
+        },
+        "tiled_64": {
+          "median_s": 0.9151653000153601,
+          "stdev_s": 0.013565290179932877,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 7.748603820800781e-07,
+          "mean_abs_error": 1.3330338610728631e-08,
+          "tiles_computed": 2080,
+          "tiles_skipped_by_causal_mask": 2016,
+          "largest_score_matrix_mb": 0.125
+        },
+        "tiled_256": {
+          "median_s": 0.17589249997399747,
+          "stdev_s": 0.003095269072105361,
+          "peak_extra_gpu_mb": null,
+          "max_abs_error": 8.344650268554688e-07,
+          "mean_abs_error": 1.506259472705551e-08,
+          "tiles_computed": 136,
+          "tiles_skipped_by_causal_mask": 120,
+          "largest_score_matrix_mb": 2.0
+        }
+      }
+    },
+    {
+      "device": "cuda",
+      "length": 64,
+      "modes": {
+        "reference": {
+          "median_s": 0.0004610000178217888,
+          "stdev_s": 3.0281568232787006e-05,
+          "peak_extra_gpu_mb": 0.38134765625,
+          "largest_score_matrix_mb": 0.125
+        },
+        "pytorch_fused": {
+          "median_s": 0.00011140014976263046,
+          "stdev_s": 2.4261820333228054e-05,
+          "peak_extra_gpu_mb": 0.140625,
+          "max_abs_error": 1.430511474609375e-06
+        },
+        "tiled_16": {
+          "median_s": 0.005750900134444237,
+          "stdev_s": 0.0001630467459216722,
+          "peak_extra_gpu_mb": 0.29052734375,
+          "max_abs_error": 8.344650268554688e-07,
+          "mean_abs_error": 5.275107994862083e-08,
+          "tiles_computed": 10,
+          "tiles_skipped_by_causal_mask": 6,
+          "largest_score_matrix_mb": 0.0078125
+        },
+        "tiled_64": {
+          "median_s": 0.0007127998396754265,
+          "stdev_s": 9.880457719503717e-05,
+          "peak_extra_gpu_mb": 0.76171875,
+          "max_abs_error": 4.76837158203125e-07,
+          "mean_abs_error": 2.6393120577949958e-08,
+          "tiles_computed": 1,
+          "tiles_skipped_by_causal_mask": 0,
+          "largest_score_matrix_mb": 0.125
+        },
+        "tiled_256": {
+          "median_s": 0.0006540000904351473,
+          "stdev_s": 2.5332953777136904e-05,
+          "peak_extra_gpu_mb": 0.76171875,
+          "max_abs_error": 4.76837158203125e-07,
+          "mean_abs_error": 2.6393120577949958e-08,
+          "tiles_computed": 1,
+          "tiles_skipped_by_causal_mask": 0,
+          "largest_score_matrix_mb": 0.125
+        }
+      }
+    },
+    {
+      "device": "cuda",
+      "length": 256,
+      "modes": {
+        "reference": {
+          "median_s": 0.000377400079742074,
+          "stdev_s": 3.0072609663461325e-06,
+          "peak_extra_gpu_mb": 6.025390625,
+          "largest_score_matrix_mb": 2.0
+        },
+        "pytorch_fused": {
+          "median_s": 0.00018589990213513374,
+          "stdev_s": 5.0520370014628586e-06,
+          "peak_extra_gpu_mb": 0.75,
+          "max_abs_error": 2.2649765014648438e-06
+        },
+        "tiled_16": {
+          "median_s": 0.08598179998807609,
+          "stdev_s": 0.009514580397064336,
+          "peak_extra_gpu_mb": 1.04052734375,
+          "max_abs_error": 8.344650268554688e-07,
+          "mean_abs_error": 4.1978935882980295e-08,
+          "tiles_computed": 136,
+          "tiles_skipped_by_causal_mask": 120,
+          "largest_score_matrix_mb": 0.0078125
+        },
+        "tiled_64": {
+          "median_s": 0.005536400014534593,
+          "stdev_s": 0.00024596697271961956,
+          "peak_extra_gpu_mb": 1.255859375,
+          "max_abs_error": 5.364418029785156e-07,
+          "mean_abs_error": 2.6650756268509213e-08,
+          "tiles_computed": 10,
+          "tiles_skipped_by_causal_mask": 6,
+          "largest_score_matrix_mb": 0.125
+        },
+        "tiled_256": {
+          "median_s": 0.0006878001149743795,
+          "stdev_s": 0.00029442319537894174,
+          "peak_extra_gpu_mb": 6.5390625,
+          "max_abs_error": 7.152557373046875e-07,
+          "mean_abs_error": 2.8219513836802435e-08,
+          "tiles_computed": 1,
+          "tiles_skipped_by_causal_mask": 0,
+          "largest_score_matrix_mb": 2.0
+        }
+      }
+    },
+    {
+      "device": "cuda",
+      "length": 1024,
+      "modes": {
+        "reference": {
+          "median_s": 0.0036186999641358852,
+          "stdev_s": 5.275142900727049e-05,
+          "peak_extra_gpu_mb": 96.1015625,
+          "largest_score_matrix_mb": 32.0
+        },
+        "pytorch_fused": {
+          "median_s": 0.0014758999459445477,
+          "stdev_s": 2.094217338803228e-05,
+          "peak_extra_gpu_mb": 6.0,
+          "max_abs_error": 1.6689300537109375e-06
+        },
+        "tiled_16": {
+          "median_s": 1.3238142000045627,
+          "stdev_s": 0.06898642027640184,
+          "peak_extra_gpu_mb": 4.04052734375,
+          "max_abs_error": 1.3113021850585938e-06,
+          "mean_abs_error": 3.159302863764424e-08,
+          "tiles_computed": 2080,
+          "tiles_skipped_by_causal_mask": 2016,
+          "largest_score_matrix_mb": 0.0078125
+        },
+        "tiled_64": {
+          "median_s": 0.08455969998613,
+          "stdev_s": 0.009382061456956466,
+          "peak_extra_gpu_mb": 4.255859375,
+          "max_abs_error": 5.960464477539062e-07,
+          "mean_abs_error": 2.3617740652071006e-08,
+          "tiles_computed": 136,
+          "tiles_skipped_by_causal_mask": 120,
+          "largest_score_matrix_mb": 0.125
+        },
+        "tiled_256": {
+          "median_s": 0.008623600006103516,
+          "stdev_s": 0.0027571607744983663,
+          "peak_extra_gpu_mb": 8.046875,
+          "max_abs_error": 5.960464477539062e-07,
+          "mean_abs_error": 2.5983236895399386e-08,
+          "tiles_computed": 10,
+          "tiles_skipped_by_causal_mask": 6,
+          "largest_score_matrix_mb": 2.0
+        }
+      }
+    },
+    {
+      "device": "cuda",
+      "length": 4096,
+      "modes": {
+        "reference": {
+          "median_s": 0.053433800116181374,
+          "stdev_s": 0.00011589274913597832,
+          "peak_extra_gpu_mb": 1536.40625,
+          "largest_score_matrix_mb": 512.0
+        },
+        "pytorch_fused": {
+          "median_s": 0.01866229996085167,
+          "stdev_s": 6.588945749173008e-05,
+          "peak_extra_gpu_mb": 72.0,
+          "max_abs_error": 1.430511474609375e-06
+        },
+        "tiled_16": {
+          "median_s": 21.734311199979857,
+          "stdev_s": 0.4914943735163478,
+          "peak_extra_gpu_mb": 16.04052734375,
+          "max_abs_error": 8.344650268554688e-07,
+          "mean_abs_error": 2.588116565505061e-08,
+          "tiles_computed": 32896,
+          "tiles_skipped_by_causal_mask": 32640,
+          "largest_score_matrix_mb": 0.0078125
+        },
+        "tiled_64": {
+          "median_s": 1.362968600122258,
+          "stdev_s": 0.10273831453560418,
+          "peak_extra_gpu_mb": 16.255859375,
+          "max_abs_error": 8.344650268554688e-07,
+          "mean_abs_error": 2.200539839236626e-08,
+          "tiles_computed": 2080,
+          "tiles_skipped_by_causal_mask": 2016,
+          "largest_score_matrix_mb": 0.125
+        },
+        "tiled_256": {
+          "median_s": 0.10108069982379675,
+          "stdev_s": 0.005555666617574409,
+          "peak_extra_gpu_mb": 18.5234375,
+          "max_abs_error": 8.344650268554688e-07,
+          "mean_abs_error": 2.3311814700832656e-08,
+          "tiles_computed": 136,
+          "tiles_skipped_by_causal_mask": 120,
+          "largest_score_matrix_mb": 2.0
+        }
+      }
+    }
+  ],
+  "cpu_name": "cpu",
+  "cuda_name": "NVIDIA GeForce RTX 3050 Ti Laptop GPU"
+}
