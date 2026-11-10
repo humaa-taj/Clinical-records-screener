@@ -1,5 +1,6 @@
-import '@fontsource-variable/geist';
-import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/plus-jakarta-sans';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
