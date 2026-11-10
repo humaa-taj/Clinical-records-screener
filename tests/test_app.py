@@ -308,7 +308,7 @@ def test_report_omits_an_empty_group():
 
 def test_reports_record_exact_model_and_adapter_versions():
     lock = json.loads((ROOT / "adapters.lock.json").read_text(encoding="utf-8"))["crs-adapter"]
-    versions = pinned_versions("models/qwen2.5-1.5b", "models\crs-adapter")
+    versions = pinned_versions("models/qwen2.5-1.5b", "models/crs-adapter")
     assert versions["adapter_revision"] == f"{lock['repo']}@{lock['revision']}"
     assert versions["target_revision"].startswith("Qwen/Qwen2.5-1.5B-Instruct@")
 
