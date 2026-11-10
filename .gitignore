@@ -1,0 +1,16 @@
+.venv/
+models/
+runs/
+papers/
+data/nltk_data/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.cache/
+GenAI_Assignment#2.pdf
+IEE Paper Fromat.pdf
+21st dev components.md
+reports/
+app/web/node_modules/
+runs_bundle.zip
+kaggle run 2/

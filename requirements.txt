@@ -1,0 +1,26 @@
+# Install GPU PyTorch first (see scripts/setup_env.ps1):
+#   pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0
+transformers==5.8.0
+peft==0.21.2
+accelerate==1.15.0
+datasets==5.1.0
+bitsandbytes==0.50.2
+huggingface_hub==1.33.0
+safetensors==0.7.0
+tokenizers==0.22.2
+numpy==2.3.5
+pandas==3.0.0
+pyarrow
+scikit-learn==1.8.0
+matplotlib==3.10.7
+pytest==9.0.2
+fastapi==0.128.0
+uvicorn==0.40.0
+python-multipart
+httpx==0.28.1
+psutil
+pyyaml==6.0.3
+# Kaggle preinstalls torchao 0.10.0, and peft refuses to attach LoRA adapters alongside it.
+torchao==0.18.0
+nltk
