@@ -8,7 +8,7 @@ greedy speculative decoding from scratch.
 
 > **Educational screening prototype — not a clinical enrollment decision.**
 
-**Demo video:** https://youtu.be/76MjCNBUb2Q · **Report:** [`report/main.tex`](report/main.tex)
+**Demo video:** https://youtu.be/76MjCNBUb2Q · **Report:** [`report/CRS_report.pdf`](report/CRS_report.pdf) (LaTeX source in [`report/`](report/))
 
 GenAI Assignment #2. Model: **Qwen2.5-1.5B-Instruct + LoRA** (target) and
 **Qwen2.5-0.5B-Instruct + LoRA** (speculative draft). Dataset:
