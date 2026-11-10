@@ -1,12 +1,12 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { api, waitForJob, type AttentionOutput, type CriterionResult, type DecodingOutput, type ReportSummary, type Status } from './api';
-import { Notice } from './shared';
+import { Notice, PageTitle } from './shared';
 
 const TABS = [
   ['decoding', 'Decoding'],
   ['attention', 'Attention'],
-  ['reports', 'Reports'],
-  ['model', 'Model'],
+  ['reports', 'Saved reports'],
+  ['model', 'Model info'],
 ] as const;
 
 const MODE_NAMES: Record<string, string> = { uncached: 'No cache (reference)', cached: 'KV cache', speculative: 'Speculative' };
@@ -15,7 +15,7 @@ const number = (value: number | null | undefined, digits = 2) => (value == null 
 function Panel({ id, tab, title, children }: { id: string; tab: string; title: string; children: ReactNode }) {
   return (
     <section id={`panel-${id}`} role="tabpanel" aria-labelledby={`tab-${id}`} hidden={tab !== id}>
-      <h2 className="m-0 mb-4 text-2xl font-medium">{title}</h2>
+      <h2 className="m-0 mb-4">{title}</h2>
       {children}
     </section>
   );
@@ -24,20 +24,20 @@ function Panel({ id, tab, title, children }: { id: string; tab: string; title: s
 function Bars({ title, unit, rows }: { title: string; unit: string; rows: Array<{ label: string; value: number; reference: boolean }> }) {
   const max = Math.max(...rows.map((row) => row.value), 1e-9);
   return (
-    <figure className="card m-0 p-6">
-      <figcaption className="mb-5 text-lg">{title}</figcaption>
+    <figure className="card m-0 p-5">
+      <figcaption className="card-title">{title}</figcaption>
       <div className="flex flex-col gap-3.5">
         {rows.map((row) => (
           <div key={row.label} className="grid items-center gap-x-4 gap-y-1 sm:grid-cols-[12rem_1fr]">
-            <span className="text-neutral-300">{row.label}</span>
+            <span className="text-sm font-semibold">{row.label}</span>
             <div className="flex items-center gap-3">
-              <div className={`h-4 rounded-sm ${row.reference ? 'hatched' : 'solid-glow'}`} style={{ width: `${(row.value / max) * 82}%`, minWidth: 3 }} />
-              <span className="font-medium tabular-nums">{row.value.toFixed(2)}</span>
+              <div className={`h-5 rounded-md ${row.reference ? 'bar-ref' : 'bar-main'}`} style={{ width: `${(row.value / max) * 82}%`, minWidth: 6 }} />
+              <span className="mono font-bold">{row.value.toFixed(2)}</span>
             </div>
           </div>
         ))}
       </div>
-      <p className="m-0 mt-5 text-sm text-neutral-400">{unit}. Hatched: reference. Solid: compared method.</p>
+      <p className="hint mt-4">{unit}. Striped pink: reference. Solid green: compared method.</p>
     </figure>
   );
 }
@@ -103,11 +103,11 @@ function DecodingLab({ ready, sentences, choices, startIndex, criterion, criteri
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="card flex flex-col gap-4 p-5">
-        {usingExample && <p className="m-0 text-sm text-neutral-300">Showing a made-up example, since there is no screening yet. You can edit it.</p>}
+      <div className="card card-butter flex flex-col gap-4 p-5">
+        {usingExample && <p className="hint">No screening yet, so a sample case is filled in. Edit it freely.</p>}
         {choices.length > 0 && (
-          <label className="flex flex-col gap-2 text-neutral-300">
-            Criterion from this result
+          <label className="field-label">
+            Pick a criterion from your results
             <select className="field" value={picked} onChange={(event) => pick(Number(event.target.value))}>
               {choices.map((choice, index) => (
                 <option key={index} value={index}>
@@ -117,50 +117,50 @@ function DecodingLab({ ready, sentences, choices, startIndex, criterion, criteri
             </select>
           </label>
         )}
-        <label className="flex flex-col gap-2 text-neutral-300">
-          Patient sentences, one per line
+        <label className="field-label">
+          Patient sentences (one per line)
           <textarea className="field min-h-28" value={note} onChange={(event) => setNote(event.target.value)} />
         </label>
         <div className="grid gap-4 sm:grid-cols-[10rem_1fr]">
-          <label className="flex flex-col gap-2 text-neutral-300">
-            Type
+          <label className="field-label">
+            Criterion type
             <select className="field" value={kind} onChange={(event) => setKind(event.target.value)}>
               <option value="inclusion">Inclusion</option>
               <option value="exclusion">Exclusion</option>
             </select>
           </label>
-          <label className="flex flex-col gap-2 text-neutral-300">
-            Criterion
+          <label className="field-label">
+            Criterion text
             <input className="field" value={text} onChange={(event) => setText(event.target.value)} />
           </label>
         </div>
         <div className="grid items-end gap-4 sm:grid-cols-3">
-          <label className="flex flex-col gap-2 text-neutral-300">
-            Maximum output tokens
+          <label className="field-label">
+            Max tokens to generate
             <select className="field" value={limit} onChange={(event) => setLimit(Number(event.target.value))}>
               {[16, 32, 64, 128, 256].map((value) => (
                 <option key={value}>{value}</option>
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-2 text-neutral-300">
-            Draft length
+          <label className="field-label">
+            Draft tokens per round
             <select className="field" value={draftLength} onChange={(event) => setDraftLength(Number(event.target.value))}>
               {[2, 4, 8].map((value) => (
                 <option key={value}>{value}</option>
               ))}
             </select>
           </label>
-          <label className="flex items-center gap-2 pb-3 text-neutral-300">
+          <label className="flex items-center gap-2 pb-3 text-sm font-bold">
             <input type="checkbox" checked={ignoreEos} onChange={(event) => setIgnoreEos(event.target.checked)} />
-            Generate the full length
+            Ignore end-of-text (always generate the max)
           </label>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <button type="button" className="btn btn-primary" disabled={running || Boolean(blocked)} onClick={run}>
-            {running ? 'Running...' : 'Run comparison'}
+            {running ? 'Running all three methods…' : 'Compare decoding methods'}
           </button>
-          {blocked && <span className="text-sm text-neutral-300">{blocked}</span>}
+          {blocked && <span className="hint">{blocked}</span>}
         </div>
       </div>
       {error && <Notice message={error} />}
@@ -170,7 +170,7 @@ function DecodingLab({ ready, sentences, choices, startIndex, criterion, criteri
             <table>
               <thead>
                 <tr>
-                  {['Mode', 'Prefill s', 'Decode s', 'Total s', 'Tokens/s', 'Output tokens', 'Peak GPU MB', 'Draft accepted', 'Tokens match'].map((heading) => (
+                  {['Method', 'Prefill s', 'Decode s', 'Total s', 'Tokens/s', 'Output tokens', 'Peak GPU MB', 'Draft accepted', 'Tokens match'].map((heading) => (
                     <th key={heading}>{heading}</th>
                   ))}
                 </tr>
@@ -179,23 +179,23 @@ function DecodingLab({ ready, sentences, choices, startIndex, criterion, criteri
                 {output.rows.map((row) => (
                   <tr key={row.mode}>
                     <td>{MODE_NAMES[row.mode]}</td>
-                    <td className="tabular-nums">{number(row.prefill_s, 3)}</td>
-                    <td className="tabular-nums">{number(row.decode_s, 3)}</td>
-                    <td className="tabular-nums">{number(row.total_s, 3)}</td>
-                    <td className="tabular-nums">{number(row.tokens_per_s, 1)}</td>
-                    <td className="tabular-nums">{row.output_tokens}</td>
-                    <td className="tabular-nums">{number(row.peak_gpu_extra_mb, 1)}</td>
-                    <td className="tabular-nums">{row.acceptance_rate == null ? 'n/a' : `${(row.acceptance_rate * 100).toFixed(1)}%`}</td>
-                    <td>{row.tokens_match_reference ? 'Yes' : 'No'}</td>
+                    <td className="mono">{number(row.prefill_s, 3)}</td>
+                    <td className="mono">{number(row.decode_s, 3)}</td>
+                    <td className="mono">{number(row.total_s, 3)}</td>
+                    <td className="mono">{number(row.tokens_per_s, 1)}</td>
+                    <td className="mono">{row.output_tokens}</td>
+                    <td className="mono">{number(row.peak_gpu_extra_mb, 1)}</td>
+                    <td className="mono">{row.acceptance_rate == null ? 'n/a' : `${(row.acceptance_rate * 100).toFixed(1)}%`}</td>
+                    <td><span className={`chip ${row.tokens_match_reference ? 'chip-met' : 'chip-failed'}`}>{row.tokens_match_reference ? 'Yes' : 'No'}</span></td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <p className="m-0 mt-3 text-sm text-neutral-400">
-              Target on {output.device}. Draft on {output.draft_device}. One live run, so timings vary.
+            <p className="hint mt-3">
+              Target model on {output.device}, draft model on {output.draft_device}. This is a single live run, so timings will vary between runs.
             </p>
           </div>
-          <Bars title="Total time" unit="Seconds" rows={output.rows.map((row) => ({ label: MODE_NAMES[row.mode], value: row.total_s, reference: row.mode === 'uncached' }))} />
+          <Bars title="Total time per method" unit="Seconds" rows={output.rows.map((row) => ({ label: MODE_NAMES[row.mode], value: row.total_s, reference: row.mode === 'uncached' }))} />
         </>
       )}
     </div>
@@ -226,17 +226,17 @@ function AttentionLab() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="card grid items-end gap-4 p-5 sm:grid-cols-[1fr_1fr_auto]">
-        <label className="flex flex-col gap-2 text-neutral-300">
-          Sequence length
+      <div className="card card-butter grid items-end gap-4 p-5 sm:grid-cols-[1fr_1fr_auto]">
+        <label className="field-label">
+          Sequence length (tokens)
           <select className="field" value={length} onChange={(event) => setLength(Number(event.target.value))}>
             {[64, 256, 512, 1024, 2048, 4096].map((value) => (
               <option key={value}>{value}</option>
             ))}
           </select>
         </label>
-        <label className="flex flex-col gap-2 text-neutral-300">
-          Tile size
+        <label className="field-label">
+          Tile size (tokens)
           <select className="field" value={tile} onChange={(event) => setTile(Number(event.target.value))}>
             {[16, 32, 64, 128, 256].map((value) => (
               <option key={value}>{value}</option>
@@ -244,22 +244,22 @@ function AttentionLab() {
           </select>
         </label>
         <button type="button" className="btn btn-primary mb-1" disabled={running || tile > length} onClick={run}>
-          {running ? 'Running...' : 'Run comparison'}
+          {running ? 'Running…' : 'Compare attention'}
         </button>
       </div>
-      {tile > length && <p className="m-0 text-sm text-neutral-400">The tile size cannot be larger than the sequence length.</p>}
+      {tile > length && <p className="hint">Choose a tile size no larger than the sequence length.</p>}
       {error && <Notice message={error} />}
       {output && (
         <>
-          <div className="card grid gap-4 p-5 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3">
             {[
               ['Max absolute error', output.max_abs_error.toExponential(2)],
               ['Mean absolute error', output.mean_abs_error.toExponential(2)],
               ['Tiles computed / skipped', `${output.tiles_computed} / ${output.tiles_skipped}`],
             ].map(([label, value]) => (
-              <div key={label}>
-                <p className="m-0 text-sm text-neutral-400">{label}</p>
-                <p className="m-0 mt-1 text-xl tabular-nums">{value}</p>
+              <div key={label} className="card card-matcha p-4">
+                <p className="eyebrow">{label}</p>
+                <p className="mono m-0 mt-1 !text-xl font-bold">{value}</p>
               </div>
             ))}
           </div>
@@ -267,7 +267,7 @@ function AttentionLab() {
             title="Runtime"
             unit={`Milliseconds on ${output.device}, causal mask, length ${output.length}, tile ${output.tile}`}
             rows={[
-              { label: 'Reference', value: output.reference_ms, reference: true },
+              { label: 'Reference attention', value: output.reference_ms, reference: true },
               { label: 'Tiled online softmax', value: output.tiled_ms, reference: false },
             ]}
           />
@@ -276,7 +276,7 @@ function AttentionLab() {
               title="Peak GPU memory above the inputs"
               unit="Megabytes"
               rows={[
-                { label: 'Reference', value: output.reference_gpu_extra_mb, reference: true },
+                { label: 'Reference attention', value: output.reference_gpu_extra_mb, reference: true },
                 { label: 'Tiled online softmax', value: output.tiled_gpu_extra_mb ?? 0, reference: false },
               ]}
             />
@@ -296,14 +296,14 @@ function Reports({ onOpen }: { onOpen: (id: string) => void }) {
   }, []);
 
   if (error) return <Notice message={error} />;
-  if (!rows) return <p className="m-0 text-neutral-400">Loading...</p>;
-  if (!rows.length) return <p className="m-0 text-neutral-400">No saved screenings yet.</p>;
+  if (!rows) return <p className="hint">Loading saved reports…</p>;
+  if (!rows.length) return <p className="hint">Nothing saved yet. Every finished screening appears here.</p>;
   return (
     <div className="card overflow-x-auto p-5">
       <table>
         <thead>
           <tr>
-            {['Created (UTC)', 'Outcome', 'Criteria', 'Mode', ''].map((heading) => (
+            {['Saved (UTC)', 'Outcome', 'Criteria', 'Method', ''].map((heading) => (
               <th key={heading}>{heading}</th>
             ))}
           </tr>
@@ -311,15 +311,15 @@ function Reports({ onOpen }: { onOpen: (id: string) => void }) {
         <tbody>
           {rows.map((row) => (
             <tr key={row.id}>
-              <td className="tabular-nums">{row.created_utc.replace('T', ' ').replace('+00:00', '')}</td>
+              <td className="mono">{row.created_utc.replace('T', ' ').replace('+00:00', '')}</td>
               <td>{row.outcome}</td>
-              <td className="tabular-nums">{row.criteria}</td>
+              <td className="mono">{row.criteria}</td>
               <td>{row.mode}</td>
               <td className="whitespace-nowrap">
-                <button type="button" className="btn !px-3 !py-1 text-sm" onClick={() => onOpen(row.id)}>
+                <button type="button" className="btn btn-small" onClick={() => onOpen(row.id)}>
                   Open
                 </button>{' '}
-                <a className="btn !px-3 !py-1 text-sm no-underline" href={`/api/reports/${row.id}/download.html`}>
+                <a className="btn btn-small" href={`/api/reports/${row.id}/download.html`}>
                   Download
                 </a>
               </td>
@@ -335,12 +335,12 @@ export default function Inspect({ status, onOpenReport, ...lab }: Omit<LabProps,
   const ready = status?.state === 'ready';
   const [tab, setTab] = useState<(typeof TABS)[number][0]>('decoding');
   return (
-    <div className="flex w-full flex-col gap-8 px-8 pt-6 pb-36 lg:px-12">
-      <div>
-        <h1 className="glow-text m-0 text-4xl font-medium">Inspect</h1>
-        <div className="mt-5 flex flex-wrap gap-2" role="tablist" aria-label="Inspect sections">
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
+        <PageTitle eyebrow="Model lab" title="Look under the hood" lead="Run the decoding and attention implementations live, reopen past screenings, and check which model is loaded." />
+        <div className="tabs" role="tablist" aria-label="Inspect sections">
           {TABS.map(([id, label]) => (
-            <button key={id} type="button" role="tab" id={`tab-${id}`} aria-selected={tab === id} aria-controls={`panel-${id}`} className={`btn text-sm ${tab === id ? 'btn-primary' : ''}`} onClick={() => setTab(id)}>
+            <button key={id} type="button" role="tab" id={`tab-${id}`} aria-selected={tab === id} aria-controls={`panel-${id}`} className="tab" onClick={() => setTab(id)}>
               {label}
             </button>
           ))}
@@ -348,23 +348,23 @@ export default function Inspect({ status, onOpenReport, ...lab }: Omit<LabProps,
       </div>
       {status?.state === 'failed' && <Notice message={status.error ?? 'The model failed to load.'} />}
       {/* Panels stay mounted, so a finished comparison is still there after switching tabs. */}
-      <Panel id="decoding" tab={tab} title="Decoding comparison">
+      <Panel id="decoding" tab={tab} title="No cache vs KV cache vs speculative">
         <DecodingLab ready={ready} {...lab} />
       </Panel>
-      <Panel id="attention" tab={tab} title="Attention comparison">
+      <Panel id="attention" tab={tab} title="Reference vs tiled online-softmax attention">
         <AttentionLab />
       </Panel>
-      <Panel id="reports" tab={tab} title="Saved reports">
+      <Panel id="reports" tab={tab} title="Saved screenings">
         <Reports onOpen={onOpenReport} />
       </Panel>
-      <Panel id="model" tab={tab} title="Model">
+      <Panel id="model" tab={tab} title="Loaded model">
         {status && (
           <div className="card p-5">
             <table>
               <tbody>
                 {[
                   ['Target model', status.target_model],
-                  ['Fine-tuned adapter', status.adapter ?? 'None, untrained base model'],
+                  ['Fine-tuned adapter', status.adapter ?? 'None (untrained base model)'],
                   ['Output format', status.output_order.replace('_', ' ')],
                   ['Draft model', status.draft_model],
                   ['Device', status.device],
