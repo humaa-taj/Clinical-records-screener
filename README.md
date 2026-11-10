@@ -8,6 +8,8 @@ greedy speculative decoding from scratch.
 
 > **Educational screening prototype — not a clinical enrollment decision.**
 
+**Demo video:** https://youtu.be/76MjCNBUb2Q · **Report:** [`report/main.tex`](report/main.tex)
+
 GenAI Assignment #2. Model: **Qwen2.5-1.5B-Instruct + LoRA** (target) and
 **Qwen2.5-0.5B-Instruct + LoRA** (speculative draft). Dataset:
 [ncbi/TrialGPT-Criterion-Annotations](https://huggingface.co/datasets/ncbi/TrialGPT-Criterion-Annotations).
@@ -282,6 +284,8 @@ are template-based and quote the cited sentences verbatim, so they cannot invent
 | Draft LoRA adapter (R6) | [faa-tehe/crs-qwen2.5-0.5b-draft-lora](https://huggingface.co/faa-tehe/crs-qwen2.5-0.5b-draft-lora) |
 | Base models | Hugging Face `Qwen/Qwen2.5-1.5B-Instruct`, `Qwen/Qwen2.5-0.5B-Instruct` (revisions in `resources.lock.json`) |
 | Split manifest | `splits/manifest.json` |
+| Demo video | https://youtu.be/76MjCNBUb2Q |
+| Demo inputs (unseen note and criteria) | `demo/` |
 | Benchmark logs | `results/bench_*.json` |
 
 `scripts/fetch_adapters.py` downloads the adapters at the pinned revisions.
