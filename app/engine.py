@@ -56,8 +56,10 @@ class Engine:
 
     def load(self):
         try:
+            # float16 matmuls are slow and less accurate on CPU, so the CPU path uses float32.
+            dtype = torch.float16 if self.device.type == "cuda" else torch.float32
             self.target, self.tokenizer = load_for_inference(
-                ROOT / self.target_path, self._adapter(self.target_adapter), self.device, torch.float16
+                ROOT / self.target_path, self._adapter(self.target_adapter), self.device, dtype
             )
             self.state = "ready"
         except Exception as error:  # Shown on screen in place of a server crash.
