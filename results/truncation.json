@@ -1,0 +1,20 @@
+{
+  "policy": "no truncation in training or evaluation",
+  "tokenizer": "qwen2.5-1.5b",
+  "splits": {
+    "train": {
+      "examples": 602,
+      "truncated": 0,
+      "tokens_median": 318,
+      "tokens_p95": 506,
+      "tokens_max": 634
+    },
+    "validation": {
+      "examples": 206,
+      "truncated": 0,
+      "tokens_median": 359,
+      "tokens_p95": 404,
+      "tokens_max": 468
+    }
+  }
+}
