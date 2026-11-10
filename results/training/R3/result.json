@@ -1,0 +1,66 @@
+{
+  "run": "R3",
+  "config": {
+    "model": "models/qwen2.5-1.5b",
+    "train": true,
+    "epochs": 10,
+    "patience": 2,
+    "batch_size": 4,
+    "accumulation_steps": 2,
+    "gradient_checkpointing": true,
+    "eval_batch_size": 32,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.0,
+    "warmup_fraction": 0.1,
+    "max_grad_norm": 1.0,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "oversample_power": 0.5,
+    "order": "label_first",
+    "max_new_tokens": 96,
+    "seed": 42
+  },
+  "decoding": {
+    "mode": "greedy",
+    "do_sample": false,
+    "num_beams": 1,
+    "repetition_penalty": 1.0,
+    "max_new_tokens": 96,
+    "eos_token_id": [
+      151643,
+      151645
+    ]
+  },
+  "split": "validation",
+  "num_train": 602,
+  "num_validation": 206,
+  "best_epoch": 4,
+  "epochs_run": 6,
+  "metrics": {
+    "accuracy": 0.7427184466019418,
+    "macro_f1": 0.5583533282935077,
+    "invalid_rate": 0.0,
+    "evidence_precision": 0.5229357798165137,
+    "evidence_recall": 0.4956521739130435,
+    "evidence_f1": 0.5089285714285714,
+    "labels_scored": [
+      "excluded",
+      "included",
+      "not applicable",
+      "not enough information",
+      "not excluded",
+      "not included"
+    ]
+  },
+  "trainable_parameters": 8716288,
+  "total_parameters": 1552430592,
+  "elapsed_seconds": 1295.3509825249998,
+  "peak_gpu_gb": 7.553126335144043
+}

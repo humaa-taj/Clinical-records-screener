@@ -1,0 +1,30 @@
+# Every setting used for fine-tuning. All selection is done on the validation split.
+defaults:
+  model: models/qwen2.5-1.5b
+  train: true
+  epochs: 10
+  patience: 2
+  batch_size: 4
+  accumulation_steps: 2
+  gradient_checkpointing: true
+  eval_batch_size: 32
+  learning_rate: 0.0002
+  weight_decay: 0.0
+  warmup_fraction: 0.1
+  max_grad_norm: 1.0
+  lora_rank: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj]
+  oversample_power: 0.0
+  order: label_first
+  max_new_tokens: 96
+  seed: 42
+
+# Fixed runs. R4, R5 and R6 are derived from the best of these by run_experiments.py.
+runs:
+  R0: {train: false}
+  R0b: {train: false, model: models/smollm2-1.7b}
+  R1: {}
+  R2: {oversample_power: 0.5}
+  R3: {oversample_power: 0.5, lora_rank: 32, lora_alpha: 64}

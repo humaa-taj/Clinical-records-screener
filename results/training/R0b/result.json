@@ -1,0 +1,65 @@
+{
+  "run": "R0b",
+  "config": {
+    "model": "models/smollm2-1.7b",
+    "train": false,
+    "epochs": 10,
+    "patience": 2,
+    "batch_size": 4,
+    "accumulation_steps": 2,
+    "gradient_checkpointing": true,
+    "eval_batch_size": 32,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.0,
+    "warmup_fraction": 0.1,
+    "max_grad_norm": 1.0,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "oversample_power": 0.0,
+    "order": "label_first",
+    "max_new_tokens": 96,
+    "seed": 42
+  },
+  "decoding": {
+    "mode": "greedy",
+    "do_sample": false,
+    "num_beams": 1,
+    "repetition_penalty": 1.0,
+    "max_new_tokens": 96,
+    "eos_token_id": [
+      2
+    ]
+  },
+  "split": "validation",
+  "num_train": 602,
+  "num_validation": 206,
+  "best_epoch": 0,
+  "epochs_run": 0,
+  "metrics": {
+    "accuracy": 0.1796116504854369,
+    "macro_f1": 0.12020638683586667,
+    "invalid_rate": 0.0,
+    "evidence_precision": 0.06518518518518518,
+    "evidence_recall": 0.3826086956521739,
+    "evidence_f1": 0.11139240506329114,
+    "labels_scored": [
+      "excluded",
+      "included",
+      "not applicable",
+      "not enough information",
+      "not excluded",
+      "not included"
+    ]
+  },
+  "trainable_parameters": 1711376384,
+  "total_parameters": 1711376384,
+  "elapsed_seconds": 26.83698098900004,
+  "peak_gpu_gb": 6.393469333648682
+}

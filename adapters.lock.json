@@ -1,0 +1,14 @@
+{
+  "crs-adapter": {
+    "repo": "faa-tehe/crs-qwen2.5-1.5b-lora",
+    "revision": "4925e9b7b4ad7a7afdf88efd04260ca1405e55c0",
+    "run": "R3",
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct"
+  },
+  "crs-draft-adapter": {
+    "repo": "faa-tehe/crs-qwen2.5-0.5b-draft-lora",
+    "revision": "b728374dab61d1614f359ee7fbd92af2481dbfaa",
+    "run": "R6",
+    "base_model": "Qwen/Qwen2.5-0.5B-Instruct"
+  }
+}

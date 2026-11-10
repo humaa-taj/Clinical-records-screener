@@ -1,0 +1,11 @@
+{
+  "final_target_run": "R3",
+  "draft_run": "R6",
+  "selection_rule": "highest validation macro-F1, then evidence F1, among Qwen2.5-1.5B runs R1-R4",
+  "settings": {
+    "oversample_power": 0.5,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "order": "label_first"
+  }
+}

@@ -1,0 +1,42 @@
+Console output kept from the first Kaggle run of kaggle/final_eval_and_benchmarks.ipynb.
+The session stopped for inactivity during the final benchmark cell (speculative decoding),
+which erased its files. This text was copied from the notebook before the rerun.
+Code: tag final-config, commit ef4a66968741fb006b1a667c0dab95945219d762.
+Environment: Kaggle GPU T4 x2, torch 2.11.0+cu130, transformers 5.8.0, peft 0.21.2.
+Tests before evaluation: 149 passed.
+
+Validation
+before  rows=206 accuracy=0.1748 macro_f1=0.1466 invalid=0.0000
+after   rows=206 accuracy=0.7427 macro_f1=0.5584 invalid=0.0000
+baseline rows=206 accuracy=0.6214 macro_f1=0.2153 invalid=0.0000
+
+Test
+before  rows=206 accuracy=0.2039 macro_f1=0.2343 invalid=0.0000
+after   rows=206 accuracy=0.7282 macro_f1=0.5595 invalid=0.0000
+baseline rows=206 accuracy=0.6262 macro_f1=0.2718 invalid=0.0000
+
+Test access log
+{"time_utc": "2026-11-09T12:24:05.973552+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": "models/qwen2.5-1.5b", "adapter": null, "order": "label_first", "baseline": false}
+{"time_utc": "2026-11-09T12:24:50.950079+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": "models/qwen2.5-1.5b", "adapter": "models/crs-adapter", "order": "label_first", "baseline": false}
+{"time_utc": "2026-11-09T12:25:35.257615+00:00", "commit": "ef4a66968741fb006b1a667c0dab95945219d762", "split": "test", "model": null, "adapter": null, "order": "label_first", "baseline": true}
+
+Cache benchmark (kaggle-t4-finetuned)
+in=64 out=16 equal=True max_diff=0.05469 uncached=0.656s cached=0.597s speedup=1.10x
+in=64 out=64 equal=True max_diff=0.07031 uncached=2.605s cached=2.335s speedup=1.12x
+in=64 out=256 equal=True max_diff=0.08240 uncached=14.174s cached=9.488s speedup=1.49x
+in=256 out=16 equal=True max_diff=0.16406 uncached=1.196s cached=0.624s speedup=1.92x
+in=256 out=64 equal=True max_diff=0.16406 uncached=5.097s cached=2.401s speedup=2.12x
+in=256 out=256 equal=True max_diff=0.16797 uncached=24.831s cached=9.608s speedup=2.58x
+in=1024 out=16 equal=True max_diff=0.06250 uncached=5.024s cached=0.842s speedup=5.96x
+in=1024 out=64 equal=True max_diff=0.08203 uncached=20.793s cached=2.643s speedup=7.87x
+in=1024 out=256 equal=True max_diff=0.08203 uncached=92.747s cached=9.880s speedup=9.39x
+
+Attention benchmark (kaggle-t4)
+cpu n=64 reference=0.53ms pytorch_fused=0.13ms tiled_16=3.82ms tiled_64=0.88ms tiled_256=0.81ms tiled_max_err=5.36e-07
+cpu n=256 reference=6.50ms pytorch_fused=0.99ms tiled_16=54.69ms tiled_64=8.08ms tiled_256=7.36ms tiled_max_err=7.15e-07
+cpu n=1024 reference=127.73ms pytorch_fused=15.69ms tiled_16=682.32ms tiled_64=86.24ms tiled_256=29.02ms tiled_max_err=6.56e-07
+cpu n=4096 reference=1959.45ms pytorch_fused=267.23ms tiled_16=10587.40ms tiled_64=1281.50ms tiled_256=365.08ms tiled_max_err=8.34e-07
+cuda n=64 reference=0.50ms pytorch_fused=0.13ms tiled_16=5.57ms tiled_64=0.75ms tiled_256=0.72ms tiled_max_err=8.34e-07
+cuda n=256 reference=0.47ms pytorch_fused=0.24ms tiled_16=69.90ms tiled_64=5.61ms tiled_256=0.74ms tiled_max_err=1.01e-06
+cuda n=1024 reference=3.28ms pytorch_fused=2.05ms tiled_16=1029.26ms tiled_64=71.22ms tiled_256=7.33ms tiled_max_err=1.31e-06
+cuda n=4096 reference=40.43ms pytorch_fused=13.10ms tiled_16=16270.80ms tiled_64=1062.44ms tiled_256=85.33ms tiled_max_err=8.94e-07
