@@ -250,7 +250,8 @@ def create_app(engine, reports_dir=DEFAULT_REPORTS, static_dir=DEFAULT_STATIC, t
             return FileResponse(file)
         index = static_dir / "index.html"
         if index.exists():
-            return FileResponse(index)
+            # Asset names are content-hashed, but the page itself must be re-fetched so a rebuilt interface shows up.
+            return FileResponse(index, headers={"Cache-Control": "no-cache"})
         return HTMLResponse("<p>The interface has not been built yet.</p>", status_code=503)
 
     return app
