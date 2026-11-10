@@ -1,0 +1,37 @@
+torch=2.11.0+cu128 cuda=True
+[PASS] dataset columns ['annotation_id', 'patient_id', 'note', 'trial_id', 'trial_title', 'criterion_type', 'criterion_text', 'gpt4_explanation', 'explanation_correctness', 'gpt4_sentences', 'expert_sentences', 'gpt4_eligibility', 'expert_eligibility', 'training']
+[PASS] dataset rows == 1015 1015
+[PASS] unique patients == 53 (37+8+8) 53
+note                  0
+patient_id            0
+expert_eligibility    0
+criterion_type        0
+criterion_text        1
+annotation_id         0
+expert_sentences      0
+criterion_type  expert_eligibility    
+exclusion       not excluded              484
+                not enough information    119
+                not applicable             46
+                excluded                   10
+inclusion       not enough information    174
+                included                  150
+                not included               23
+                not applicable              9
+[PASS] evidence IDs exist in numbered notes 0 rows out of range
+rows with empty expert evidence: 610
+sentences per note: min=3 median=6 max=14
+note tokens: median=124 p95=254 max=372
+[PASS] 11 paper PDFs 11
+[PASS] weights qwen2.5-1.5b params=1543.7M arch=['Qwen2ForCausalLM'] layers=28
+[PASS] weights qwen2.5-0.5b params=494.0M arch=['Qwen2ForCausalLM'] layers=24
+[PASS] weights smollm2-1.7b params=1711.4M arch=['LlamaForCausalLM'] layers=24
+[PASS] draft/target vocabulary identical 151665
+[PASS] draft/target special tokens identical 
+[PASS] draft/target chat template identical 
+[PASS] draft/target encodings identical 
+[PASS] CUDA available NVIDIA GeForce RTX 3050 Ti Laptop GPU
+[PASS] GPU generate qwen2.5-0.5b peak=0.94 GB
+[PASS] GPU generate qwen2.5-1.5b peak=2.89 GB
+[PASS] punkt_tab present 
+0 failures: []

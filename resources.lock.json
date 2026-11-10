@@ -1,0 +1,73 @@
+{
+  "dataset": {
+    "ncbi/TrialGPT-Criterion-Annotations": {
+      "revision": "1cfcafde94a1560a33b4addc1638664fe28fc059",
+      "path": "data/raw",
+      "parquet_sha256": "14c547184fac9b013cd17441fd028845b40150c76b022e58334f5494077e5234"
+    }
+  },
+  "models": {
+    "Qwen/Qwen2.5-1.5B-Instruct": {
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "path": "models/qwen2.5-1.5b"
+    },
+    "Qwen/Qwen2.5-0.5B-Instruct": {
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "path": "models/qwen2.5-0.5b"
+    },
+    "HuggingFaceTB/SmolLM2-1.7B-Instruct": {
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "path": "models/smollm2-1.7b"
+    }
+  },
+  "papers": {
+    "2307.15051": {
+      "file": "papers/2307.15051-trialgpt.pdf",
+      "sha256": "f482213f189810d39a02ec31caf8bb71e393dcb8d4bd7393306e4794dfc66c1d"
+    },
+    "1706.03762": {
+      "file": "papers/1706.03762-attention-is-all-you-need.pdf",
+      "sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697"
+    },
+    "2106.09685": {
+      "file": "papers/2106.09685-lora.pdf",
+      "sha256": "e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a"
+    },
+    "2305.14314": {
+      "file": "papers/2305.14314-qlora.pdf",
+      "sha256": "33a4e757c19d6ea8d3cca8958fce8fe405e290272e135c99ee66065c775d5bd1"
+    },
+    "2211.17192": {
+      "file": "papers/2211.17192-speculative-decoding-leviathan.pdf",
+      "sha256": "8967e2daab74178b8a73a6f0b0780c5cbb40f9f6dcbd5c456b24a89c128c52ed"
+    },
+    "2302.01318": {
+      "file": "papers/2302.01318-speculative-sampling-chen.pdf",
+      "sha256": "ffa03c6ae46f3122570bacd7da358cae8659b6421162bbc25088622fd4889c37"
+    },
+    "2205.14135": {
+      "file": "papers/2205.14135-flashattention.pdf",
+      "sha256": "ca7f9fda10b90fc05dd291a3accc85e9c1a4a860b99b31928dab03ed3fcb14e4"
+    },
+    "1805.02867": {
+      "file": "papers/1805.02867-online-softmax.pdf",
+      "sha256": "722747b3a32eb90f5f0255d6b59f8bb0e1bc2257702ab7915e684c15275d44d7"
+    },
+    "2412.15115": {
+      "file": "papers/2412.15115-qwen2.5-report.pdf",
+      "sha256": "73b3292bead3ac8896679d3ac8be87439756faf356566cbda3ccc8a3dc7d79d3"
+    },
+    "2505.09388": {
+      "file": "papers/2505.09388-qwen3-report.pdf",
+      "sha256": "84a5e2b1fa04bb774bf12ae606d1e6d9dd2147ed2ebe78a4cfeb91ba380ffdd5"
+    },
+    "2502.02737": {
+      "file": "papers/2502.02737-smollm2.pdf",
+      "sha256": "a95fbda201d21cd25c89e949636373d36c288bd2d287e3cabd208e2041ea36d3"
+    }
+  },
+  "nltk": {
+    "package": "punkt_tab",
+    "path": "data/nltk_data"
+  }
+}

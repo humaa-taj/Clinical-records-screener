@@ -1,0 +1,17 @@
+hub ok: ncbi/TrialGPT-Criterion-Annotations @ 1cfcafde94a1560a33b4addc1638664fe28fc059
+paper ok: 2307.15051-trialgpt.pdf
+paper ok: 1706.03762-attention-is-all-you-need.pdf
+paper ok: 2106.09685-lora.pdf
+paper ok: 2305.14314-qlora.pdf
+paper ok: 2211.17192-speculative-decoding-leviathan.pdf
+paper ok: 2302.01318-speculative-sampling-chen.pdf
+paper ok: 2205.14135-flashattention.pdf
+paper ok: 1805.02867-online-softmax.pdf
+paper ok: 2412.15115-qwen2.5-report.pdf
+paper ok: 2505.09388-qwen3-report.pdf
+paper ok: 2502.02737-smollm2.pdf
+nltk ok: punkt_tab
+hub ok: Qwen/Qwen2.5-1.5B-Instruct @ 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+hub ok: Qwen/Qwen2.5-0.5B-Instruct @ 7ae557604adf67be50417f59c2c2f167def9a775
+hub ok: HuggingFaceTB/SmolLM2-1.7B-Instruct @ 31b70e2e869a7173562077fd711b654946d38674
+wrote resources.lock.json
